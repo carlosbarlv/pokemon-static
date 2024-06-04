@@ -6,6 +6,9 @@ interface Props {
 }
 
 const page = (params: Props) => {
+  // eslint-disable-next-line no-console
+  console.log(params);
+  
   return (
     <MainLayout>
       <div>page</div>

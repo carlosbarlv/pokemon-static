@@ -1,6 +1,8 @@
 import { pokeApi } from "@/api";
 import MainLayout from "@/components/layouts/MainLayout";
+import PokemonCard from "@/components/pokemon/PokemonCard";
 import { PokemonListResponse, SmallPokemon } from "@/interfaces/pokemon-list";
+import { Row } from "antd";
 import { Metadata, NextPage } from "next";
 
 export const metadata: Metadata = {
@@ -28,11 +30,11 @@ const HomePage: NextPage<HomePageProps> = async () => {
 
   return (
     <MainLayout>
-      <ul>
+      <Row>
         {pokemons.map((pokemon) => (
-          <li key={pokemon.id}>{pokemon.name}</li>
+          <PokemonCard key={pokemon.id} pokemon={pokemon} />
         ))}
-      </ul>
+      </Row>
     </MainLayout>
   );
 };
