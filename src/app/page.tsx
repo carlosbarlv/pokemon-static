@@ -19,7 +19,7 @@ const getPokemons = async () => {
     ...pokemon,
     id: ++index,
     img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${
-      index + 1
+      index
     }.svg`,
   }));
   return pokemons;

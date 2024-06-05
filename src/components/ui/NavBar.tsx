@@ -1,13 +1,18 @@
-import { Affix, Image, Layout } from "antd";
+'use client'
+import { Affix, Image, Layout, theme } from "antd";
 import { Header, Content, Footer } from "antd/es/layout/layout";
+import Link from "next/link";
 import React, { FC } from "react";
 
+const { useToken } = theme
+
 const NavBar: FC<React.PropsWithChildren> = ({ children }) => {
+  const { token } = useToken()
+
   return (
     <Layout>
       <Header
         style={{
-          // alignContent: "center",
           alignItems: "center",
           display: "flex",
           position: "sticky",
@@ -23,10 +28,15 @@ const NavBar: FC<React.PropsWithChildren> = ({ children }) => {
           src={"/app_image.png"}
           width={53}
         />
-        <span style={{ fontSize: 40 }}>P</span>
-        <span style={{ fontSize: 20 }}>okémon</span>
+        <Link href={"/"} style={{ color: token.colorPrimaryText, marginLeft: 10 }}>
+          <span style={{ fontSize: 40 }}>P</span>
+          <span style={{ fontSize: 20 }}>okémon</span>
+        </Link>
       </Header>
-      <Content className="dark" style={{ padding: 25 }}>
+      <Content
+        className="dark"
+        style={{ padding: 25, position: "relative", minHeight: "100vh" }}
+      >
         {children}
       </Content>
       <Affix offsetBottom={0.01}>
