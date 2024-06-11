@@ -3,30 +3,27 @@ import MainLayout from "@/components/layouts/MainLayout";
 import PokemonCard from "@/components/pokemon/PokemonCard";
 import { PokemonListResponse, SmallPokemon } from "@/interfaces/pokemon-list";
 import { Row } from "antd";
-import { Metadata, NextPage } from "next";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Listado de Pokémons",
 };
 
-interface HomePageProps {
-  pokemons: SmallPokemon[];
-}
-
 const getPokemons = async () => {
   const { data } = await pokeApi.get<PokemonListResponse>("/pokemon?limit=151");
-  const pokemons: SmallPokemon[] = data.results.map((pokemon, index) => ({
-    ...pokemon,
-    id: ++index,
-    img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${
-      index
-    }.svg`,
-  }));
-  return pokemons;
+
+  const pokemonsResponse: SmallPokemon[] = data.results.map(
+    (pokemon, index) => ({
+      ...pokemon,
+      id: ++index,
+      img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${index}.svg`,
+    })
+  );
+  return pokemonsResponse;
 };
 
-const HomePage: NextPage<HomePageProps> = async () => {
-  const pokemons = await getPokemons();
+const HomePage = async () => {
+  const pokemons: SmallPokemon[] = await getPokemons();
 
   return (
     <MainLayout>
