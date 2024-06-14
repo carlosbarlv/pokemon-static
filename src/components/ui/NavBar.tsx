@@ -1,5 +1,5 @@
-'use client'
-import { Affix, Image, Layout, } from "antd";
+"use client";
+import { Affix, Flex, Image, Layout } from "antd";
 import { Header, Content, Footer } from "antd/es/layout/layout";
 import Link from "next/link";
 import React, { FC } from "react";
@@ -24,10 +24,15 @@ const NavBar: FC<React.PropsWithChildren> = ({ children }) => {
           src={"/app_image.png"}
           width={53}
         />
-        <Link href={"/"} style={{ color: 'white', marginLeft: 10 }}>
+        <Link href={"/"} style={{ color: "white", marginLeft: 10 }}>
           <span style={{ fontSize: 40 }}>P</span>
           <span style={{ fontSize: 20 }}>okémon</span>
         </Link>
+        <Flex justify="end" style={{ width: "100%" }}>
+          <Link href={"/favorites"} style={{ color: "white", marginLeft: 10 }}>
+            Favoritos
+          </Link>
+        </Flex>
       </Header>
       <Content
         className="dark"
