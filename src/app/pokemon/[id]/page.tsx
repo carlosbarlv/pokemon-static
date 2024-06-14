@@ -1,5 +1,4 @@
 import { pokeApi } from "@/api";
-import MainLayout from "@/components/layouts/MainLayout";
 import { Pokemon } from "@/interfaces";
 import { capitalize } from "@/utils/strings";
 import { StarFilled } from "@ant-design/icons";
@@ -40,55 +39,49 @@ const PokemonPage: NextPage<Props> = async ({ params }) => {
   ];
 
   return (
-    <MainLayout>
-      <Row gutter={[16, 4]}>
-        <Col xs={24} sm={10} md={10} lg={6}>
-          <Card style={{ height: cardHeight }}>
-            <Image
-              alt="example"
-              src={
-                pokemonAllData.sprites.other?.dream_world.front_default ??
-                "/no-image.png"
-              }
-              width={200}
-              height={cardHeight - 50}
-            />
-          </Card>
-        </Col>
-        <Col xs={24} sm={14} md={14} lg={12}>
-          <Card
-            extra={
-              <Button
-                icon={<StarFilled style={{ color: "gold" }} />}
-                type="dashed"
-              >
-                Guardar en favoritos
-              </Button>
+    <Row gutter={[16, 4]}>
+      <Col xs={24} sm={10} md={10} lg={4}>
+        <Card style={{ height: cardHeight }}>
+          <Image
+            alt="example"
+            src={
+              pokemonAllData.sprites.other?.dream_world.front_default ??
+              "/no-image.png"
             }
-            style={{ height: cardHeight }}
-            title={capitalize(pokemonAllData.name)}
-          >
-            <Row>Sprites:</Row>
-            <Flex
-              justify="space-evenly"
-              align="center"
-              style={{ width: "100%" }}
+            width={200}
+            height={cardHeight - 50}
+          />
+        </Card>
+      </Col>
+      <Col xs={24} sm={14} md={14} lg={10}>
+        <Card
+          extra={
+            <Button
+              icon={<StarFilled style={{ color: "gold" }} />}
+              type="dashed"
             >
-              {pokemonSprites.map((sprite, index) => (
-                <Col key={index + "specialKey"} xs={6}>
-                  <Image
-                    src={sprite}
-                    alt={pokemonAllData.name}
-                    width={100}
-                    height={100}
-                  />
-                </Col>
-              ))}
-            </Flex>
-          </Card>
-        </Col>
-      </Row>
-    </MainLayout>
+              Guardar en favoritos
+            </Button>
+          }
+          style={{ height: cardHeight }}
+          title={capitalize(pokemonAllData.name)}
+        >
+          <Row>Sprites:</Row>
+          <Flex justify="space-evenly" align="center" style={{ width: "100%" }}>
+            {pokemonSprites.map((sprite, index) => (
+              <Col key={index + "specialKey"} xs={6}>
+                <Image
+                  src={sprite}
+                  alt={pokemonAllData.name}
+                  width={100}
+                  height={100}
+                />
+              </Col>
+            ))}
+          </Flex>
+        </Card>
+      </Col>
+    </Row>
   );
 };
 

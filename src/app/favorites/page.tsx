@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+
+export const metadata = () => {
+  return {
+    title: "Pokémons favoritos",
+  };
+};
 
 const page = () => {
-  return (
-    <div>page</div>
-  )
-}
+  return <>Favoritos</>;
+};
 
-export default page
+export default page;

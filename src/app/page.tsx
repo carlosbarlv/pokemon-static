@@ -1,5 +1,4 @@
 import { pokeApi } from "@/api";
-import MainLayout from "@/components/layouts/MainLayout";
 import PokemonCard from "@/components/pokemon/PokemonCard";
 import { PokemonListResponse, SmallPokemon } from "@/interfaces/pokemon-list";
 import { Row } from "antd";
@@ -26,13 +25,11 @@ const HomePage = async () => {
   const pokemons: SmallPokemon[] = await getPokemons();
 
   return (
-    <MainLayout>
-      <Row>
-        {pokemons.map((pokemon) => (
-          <PokemonCard key={pokemon.id} pokemon={pokemon} />
-        ))}
-      </Row>
-    </MainLayout>
+    <Row>
+      {pokemons.map((pokemon) => (
+        <PokemonCard key={pokemon.id} pokemon={pokemon} />
+      ))}
+    </Row>
   );
 };
 
