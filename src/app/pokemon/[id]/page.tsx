@@ -3,7 +3,7 @@ import MainLayout from "@/components/layouts/MainLayout";
 import { Pokemon } from "@/interfaces";
 import { capitalize } from "@/utils/strings";
 import { StarFilled } from "@ant-design/icons";
-import { Button, Card, Col, Row } from "antd";
+import { Button, Card, Col, Flex, Row } from "antd";
 import { NextPage } from "next";
 import Image from "next/image";
 import React from "react";
@@ -32,11 +32,17 @@ const getPokemonData = async (id: string) => {
 const PokemonPage: NextPage<Props> = async ({ params }) => {
   const cardHeight = 212;
   const pokemonAllData = await getPokemonData(params.id);
+  const pokemonSprites = [
+    pokemonAllData.sprites.front_default,
+    pokemonAllData.sprites.back_default,
+    pokemonAllData.sprites.front_shiny,
+    pokemonAllData.sprites.back_shiny,
+  ];
 
   return (
     <MainLayout>
       <Row gutter={[16, 4]}>
-        <Col xs={24} sm={10} md={4}>
+        <Col xs={24} sm={10} md={10} lg={6}>
           <Card style={{ height: cardHeight }}>
             <Image
               alt="example"
@@ -45,16 +51,16 @@ const PokemonPage: NextPage<Props> = async ({ params }) => {
                 "/no-image.png"
               }
               width={200}
-              height={cardHeight-50}
+              height={cardHeight - 50}
             />
           </Card>
         </Col>
-        <Col>
+        <Col xs={24} sm={14} md={14} lg={12}>
           <Card
             extra={
               <Button
                 icon={<StarFilled style={{ color: "gold" }} />}
-                type="primary"
+                type="dashed"
               >
                 Guardar en favoritos
               </Button>
@@ -62,31 +68,23 @@ const PokemonPage: NextPage<Props> = async ({ params }) => {
             style={{ height: cardHeight }}
             title={capitalize(pokemonAllData.name)}
           >
-            <div>Sprites:</div>
-            <Image
-              src={pokemonAllData.sprites.front_default}
-              alt={pokemonAllData.name}
-              width={100}
-              height={100}
-            />
-            <Image
-              src={pokemonAllData.sprites.back_default}
-              alt={pokemonAllData.name}
-              width={100}
-              height={100}
-            />
-            <Image
-              src={pokemonAllData.sprites.front_shiny}
-              alt={pokemonAllData.name}
-              width={100}
-              height={100}
-            />
-            <Image
-              src={pokemonAllData.sprites.back_shiny}
-              alt={pokemonAllData.name}
-              width={100}
-              height={100}
-            />
+            <Row>Sprites:</Row>
+            <Flex
+              justify="space-evenly"
+              align="center"
+              style={{ width: "100%" }}
+            >
+              {pokemonSprites.map((sprite, index) => (
+                <Col key={index + "specialKey"} xs={6}>
+                  <Image
+                    src={sprite}
+                    alt={pokemonAllData.name}
+                    width={100}
+                    height={100}
+                  />
+                </Col>
+              ))}
+            </Flex>
           </Card>
         </Col>
       </Row>

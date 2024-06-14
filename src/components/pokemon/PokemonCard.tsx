@@ -1,6 +1,7 @@
 "use client";
 import { SmallPokemon } from "@/interfaces/pokemon-list";
-import { Card, Col, Image, Row } from "antd";
+import { Card, Col, Row } from "antd";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { FC } from "react";
 
@@ -17,13 +18,21 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
   };
 
   return (
-    <Col xs={4} sm={8} md={8} xl={4} xxl={6}>
+    <Col xs={12} sm={8} md={8} xl={4} xxl={6}>
       <Card
-        cover={<Image alt="Pokémon image" height={140} src={pokemon.img} />}
+        cover={
+          <Image
+            alt="Pokémon image"
+            width={140}
+            height={140}
+            src={pokemon.img}
+          />
+        }
+        onClick={handleOnPokemonClick}
         hoverable
         style={{ margin: 5, padding: 5 }}
       >
-        <Row onClick={handleOnPokemonClick}>
+        <Row>
           <Col span={12}>#{pokemon.id}</Col>
           <Col span={12} style={{ textAlign: "end" }}>
             {pokemon.name.replace(/./, pokemon.name[0].toUpperCase())}
