@@ -53,7 +53,7 @@ const PokemonPage: NextPage<Props> = async ({ params }) => {
           />
         </Card>
       </Col>
-      <Col xs={24} sm={14} md={14} lg={10}>
+      <Col xs={24} sm={24} md={14} lg={10}>
         <Card
           extra={
             <Button
